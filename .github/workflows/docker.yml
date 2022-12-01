@@ -36,4 +36,4 @@ jobs:
                 uses: docker/build-push-action@v3
                 with:
                     push: true
-                    tags: tavsec/rso-microservice-uporabniki:${{ env.TAG }}
+                    tags: tavsec/rso-microservice-pot:${{ env.TAG }}
