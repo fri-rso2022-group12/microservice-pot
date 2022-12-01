@@ -7,7 +7,7 @@ COPY go.sum ./
 RUN go mod download
 
 COPY . ./
-RUN go build -o ./microservice-uporabniki microservice-uporabniki
+RUN go build -o ./microservice-pot microservice-pot
 
 
 FROM golang:1.19-alpine
