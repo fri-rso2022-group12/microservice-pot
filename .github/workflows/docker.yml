@@ -26,11 +26,6 @@ jobs:
             -   name: Determine image tag
                 run: |
                     TAG=${{  github.head_ref || github.ref_name }}
-                    if [ "$TAG" == master ]; then
-                      echo "TAG=latest" >> "$GITHUB_ENV"
-                    else
-                      echo "TAG=$TAG" >> "$GITHUB_ENV"
-                    fi
             -
                 name: Build and push
                 uses: docker/build-push-action@v3
