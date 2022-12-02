@@ -1,4 +1,26 @@
 info:
   contact: {}
-paths: {}
+paths:
+  /path:
+    get:
+      consumes:
+      - application/json
+      description: Describe shortest path from one location to another
+      parameters:
+      - description: Starting location
+        in: query
+        name: from
+        required: true
+        type: string
+      - description: End location
+        in: query
+        name: to
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get shortest path
+      tags:
+      - path
 swagger: "2.0"
