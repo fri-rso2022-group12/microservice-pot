@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerfiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -9,6 +10,7 @@ import (
 	"microservice-pot/controllers"
 	docs "microservice-pot/docs"
 	"microservice-pot/initializers"
+	"time"
 )
 
 func init() {
@@ -18,6 +20,15 @@ func init() {
 func main() {
 	r := gin.Default()
 	docs.SwaggerInfo.BasePath = ""
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"*"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
 
 	healthcheck.New(r, healthcheck.DefaultConfig(), []checks.Check{})
 
