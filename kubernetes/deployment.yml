@@ -13,30 +13,36 @@ spec:
                 app: path-service
         spec:
             containers:
-                - image: tavsec/rso-microservice-uporabniki:latest
-                  name: path-service
-                  env:
-                      - name: GOOGLE_MAPS_API_KEY
-                        valueFrom:
-                            secretKeyRef:
-                                name: google-maps
-                                key: api-key
-                  ports:
-                      - containerPort: 8080
-                        name: server
-                        protocol: TCP
-                  livenessProbe:
-                      httpGet:
-                          path: /healthz
-                          port: 8080
-                      initialDelaySeconds: 30
-                      periodSeconds: 10
-                  readinessProbe:
-                      httpGet:
-                          path: /healthz
-                          port: 8080
-                      initialDelaySeconds: 30
-                      periodSeconds: 10
+                -   image: tavsec/rso-microservice-uporabniki:latest
+                    name: path-service
+                    env:
+                        -   name: GOOGLE_MAPS_API_KEY
+                            valueFrom:
+                                secretKeyRef:
+                                    name: google-maps
+                                    key: api-key
+
+                        -   name: CONSUL_SERVER
+                            valueFrom:
+                                secretKeyRef:
+                                    name: consul
+                                    key: consul-server
+                    ports:
+                        -   containerPort: 8080
+                            name: server
+                            protocol: TCP
+                    livenessProbe:
+                        httpGet:
+                            path: /healthz
+                            port: 8080
+                        initialDelaySeconds: 30
+                        periodSeconds: 10
+                    readinessProbe:
+                        httpGet:
+                            path: /healthz
+                            port: 8080
+                        initialDelaySeconds: 30
+                        periodSeconds: 10
 
 
 ---
@@ -48,8 +54,8 @@ metadata:
 spec:
     type: LoadBalancer
     ports:
-        - port: 8080
-          protocol: TCP
-          targetPort: server
+        -   port: 8080
+            protocol: TCP
+            targetPort: server
     selector:
         app: path-service
