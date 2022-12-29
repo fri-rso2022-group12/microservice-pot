@@ -13,7 +13,7 @@ spec:
                 app: path-service
         spec:
             containers:
-                -   image: tavsec/rso-microservice-uporabniki:latest
+                -   image: tavsec/rso-microservice-pot:master
                     name: path-service
                     env:
                         -   name: GOOGLE_MAPS_API_KEY
