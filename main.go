@@ -22,7 +22,7 @@ func init() {
 
 func main() {
 	r := gin.Default()
-	docs.SwaggerInfo.BasePath = ""
+	docs.SwaggerInfo.BasePath = "/path-service"
 
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
